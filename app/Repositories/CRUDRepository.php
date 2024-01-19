@@ -21,7 +21,7 @@ class CRUDRepository implements ICRUD
         return $this->model->find($id);
     }
 
-    public function create(array $data): bool
+    public function create(array $data)
     {
         return $this->model->create($data);
     }

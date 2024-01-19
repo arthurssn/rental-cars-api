@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Interfaces\Model\ICRUD;
+use Illuminate\Support\Facades\DB;
 
 class CRUDService implements ICRUD
 {
@@ -23,12 +24,27 @@ class CRUDService implements ICRUD
 
     public function create(array $data)
     {
-        return $this->repository->create($data);
+        DB::beginTransaction();
+        try {
+            return $this->repository->create($data);
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            throw $e;
+        }
     }
 
     public function update($id, array $data)
     {
-        return $this->repository->update($id, $data);
+        DB::beginTransaction();
+        try {
+            $item = $this->repository->update($id, $data);
+            DB::commit();
+            return $item;
+        } catch (\Exception $e) {
+            DB::rollback();
+            throw $e;
+        }
     }
 
     public function delete($id)

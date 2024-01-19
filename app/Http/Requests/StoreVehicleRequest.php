@@ -23,6 +23,21 @@ class StoreVehicleRequest extends FormRequest
             'manufacturer' => 'required|string|max:255',
             'passengers' => 'required|integer|min:1',
             'cargo_capacity' => 'required|integer|min:1',
+            'vehicle_class' => 'required|string|max:255',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'Nome é obrigatório.',
+            'model.required' => 'Modelo é obrigatório.',
+            'year.required' => 'Ano é obrigatório.',
+            'price.required' => 'Preço é obrigatório.',
+            'manufacturer.required' => 'Fabricante é obrigatório.',
+            'passengers.required' => 'Passageiros é obrigatório.',
+            'cargo_capacity.required' => 'Capacidade de carga é obrigatório.',
+            'vehicle_class.required' => 'Classe do veículo é obrigatório.',
         ];
     }
 }

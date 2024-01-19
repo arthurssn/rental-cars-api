@@ -8,6 +8,7 @@ use App\Interfaces\Model\ICRUD;
 
 class VehicleController extends Controller
 {
+
     public function __construct(private readonly ICRUD $service)
     {
     }
@@ -24,7 +25,11 @@ class VehicleController extends Controller
 
     public function store(StoreVehicleRequest $request)
     {
-        return $this->service->create($request->all());
+        try {
+            return $this->service->create($request->all());
+        } catch (\Throwable $th) {
+            return response()->json(['error' => $th->getMessage()], 500);
+        }
     }
 
     public function update(UpdateVehicleRequest $request, $id)
