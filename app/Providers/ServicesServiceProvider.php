@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Interfaces\Model\ICRUD;
+use App\Repositories\VehicleRepository;
 use App\Services\VehicleService;
 use Illuminate\Support\ServiceProvider;
 
@@ -13,6 +14,6 @@ class ServicesServiceProvider extends ServiceProvider
         $this->app
             ->when(VehicleService::class)
             ->needs(ICRUD::class)
-            ->give(VehicleService::class);
+            ->give(VehicleRepository::class);
     }
 }
