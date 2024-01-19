@@ -26,8 +26,9 @@ class CRUDService implements ICRUD
     {
         DB::beginTransaction();
         try {
-            return $this->repository->create($data);
+            $item = $this->repository->create($data);
             DB::commit();
+            return $item;
         } catch (\Exception $e) {
             DB::rollback();
             throw $e;
